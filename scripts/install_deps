@@ -1,0 +1,4 @@
+#!/bin/sh
+clear
+cd ../application
+yarn install

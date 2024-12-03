@@ -1,0 +1,5 @@
+#!/bin/sh
+clear
+./install_deps
+cd ../application
+yarn start
