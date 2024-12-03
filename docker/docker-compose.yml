@@ -1,0 +1,17 @@
+services:
+    dev:
+        env_file:
+            - .env
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        container_name: "elektron-dev"
+        restart: always
+        volumes:
+            - ./../application:/application
+            - ./../scripts:/application-scripts
+        logging:
+          driver: json-file
+          options:
+              max-size: "5m"
+              max-file: "2"

@@ -1,0 +1,6 @@
+#!/bin/bash
+cd ../docker
+docker compose build --pull --parallel --no-cache --force-rm
+docker compose up --detach
+echo "Done, attaching to dev container..."
+docker exec -it -w /application-scripts elektron-dev /bin/ash
