@@ -26,6 +26,20 @@
  * ```
  */
 
-import './index.css';
+import "./index.css";
+import { ElektronAPI } from "./modules/elektronApi";
+import { MeterEntry } from "./modules/persistence";
 
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
+declare global {
+    interface Window {
+        elektronAPI: ElektronAPI;
+    }
+}
+const elektronApi: ElektronAPI = window.elektronAPI;
+
+async function loadStoredData() {
+    const data: Array<MeterEntry> = await elektronApi.getEntries();
+    console.log(data);
+}
+
+loadStoredData();
