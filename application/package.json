@@ -1,8 +1,8 @@
 {
-  "name": "Elektron",
+  "name": "elektron",
   "productName": "Elektron",
   "version": "0.0.1",
-  "description": "Store and analyse electricity meter readings",
+  "description": "Store and analyze electricity meter readings",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",

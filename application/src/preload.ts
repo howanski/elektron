@@ -3,5 +3,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('elektronAPI', {
-    getEntries: () => ipcRenderer.invoke('getEntries')
+    getMeters: () => ipcRenderer.invoke('getMeters')
 })

@@ -1,9 +1,9 @@
-import { MeterEntry } from "./persistence";
+import { Meter } from "./persistence";
 
-interface GetterOfMeterEntries {
-    (): Promise<Array<MeterEntry>>;
+interface GetterOfMeters {
+    (): Promise<Array<Meter>>;
 }
 
 export interface ElektronAPI {
-    getEntries: GetterOfMeterEntries;
+    getMeters: GetterOfMeters;
 }
