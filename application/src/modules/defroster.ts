@@ -1,7 +1,7 @@
 import { Meter, MeterEntry, SaveFile } from "./persistence";
 
 export function defrostMeter(object: object): Meter {
-    const meter = new Meter('');
+    const meter = new Meter("");
     Object.assign(meter, object);
     for (let i = 0; i < meter.meterEntries.length; i++) {
         const entryBlob = meter.meterEntries[i];
@@ -9,6 +9,8 @@ export function defrostMeter(object: object): Meter {
         Object.assign(entry, entryBlob);
         meter.meterEntries[i] = entry;
     }
+
+    meter.meterEntries.sort(meterEntryTimestampCompare);
 
     return meter;
 }
@@ -24,4 +26,14 @@ export function defrostSaveFile(object: object): SaveFile {
     }
 
     return saveFile;
+}
+
+function meterEntryTimestampCompare(a: MeterEntry, b: MeterEntry) {
+    if (a.timestamp < b.timestamp) {
+        return -1;
+    }
+    if (a.timestamp > b.timestamp) {
+        return 1;
+    }
+    return 0;
 }

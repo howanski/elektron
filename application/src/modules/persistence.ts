@@ -6,7 +6,7 @@ export class MeterEntry {
     timestamp: number;
     wattHours: number;
 
-    getMedianWattageSince(predecessor: MeterEntry): number {
+    getMedianWattageSinceLastPoint(predecessor: MeterEntry): number {
         const timePassed = this.timestamp - predecessor.timestamp;
         const wattHoursPassed = this.wattHours - predecessor.wattHours;
         return Math.round((wattHoursPassed * 3600) / timePassed);
@@ -48,9 +48,17 @@ export class SaveFile {
         this.meters.push(entry);
     }
 
-    // #TODO time delimiters?
     getMeters() {
         return this.meters;
+    }
+
+    // #TODO time delimiters?
+    getMeterEntries(meterId: number): Array<MeterEntry> {
+        const meter = this.meters.find((meter) => meter.id == meterId);
+        if (meter instanceof Meter) {
+            return meter.getEntries();
+        }
+        return [];
     }
 
     constructor() {

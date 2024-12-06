@@ -37,8 +37,14 @@ declare global {
 const elektronApi: ElektronAPI = window.elektronAPI;
 
 async function loadStoredData() {
-    const data: Array<FlatMeter> = await elektronApi.getMeters();
-    console.log(data);
+    const meters: Array<FlatMeter> = await elektronApi.getMeters();
+    for (let i = 0; i < meters.length; i++) {
+        console.log(meters[i].name + ": ");
+        if (meters[i].hasReadings) {
+            const readings = await elektronApi.getMeterEntries(meters[i].id);
+            console.log(readings);
+        }
+    }
 }
 
 loadStoredData();
