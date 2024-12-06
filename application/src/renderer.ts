@@ -27,8 +27,7 @@
  */
 
 import "./index.css";
-import { ElektronAPI } from "./modules/elektronApi";
-import { Meter } from "./modules/persistence";
+import { ElektronAPI, FlatMeter } from "./modules/elektronApi";
 
 declare global {
     interface Window {
@@ -38,7 +37,7 @@ declare global {
 const elektronApi: ElektronAPI = window.elektronAPI;
 
 async function loadStoredData() {
-    const data: Array<Meter> = await elektronApi.getMeters();
+    const data: Array<FlatMeter> = await elektronApi.getMeters();
     console.log(data);
 }
 
