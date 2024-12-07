@@ -2,11 +2,58 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
-
+    <title>Elektron</title>
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <div>
+      <div id="navigation">
+        <button class="hidden" id="_proto_meter">Proto</button>
+      </div>
+      <div id="content">
+
+      </div>
+      <div id="scrapyard" class="hidden">
+        <table id="_proto_meters_table">
+          <thead>
+            <tr>
+              <td>
+                date
+              </td>
+              <td>
+                wattage
+              </td>
+              <td>
+                actions
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="line">
+              <td class="date">
+              </td>
+              <td class="wattage">
+              
+              </td>
+              <td class="btns">
+              <button class="remove-meter-reading">X</button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="new-line">
+              <td>
+                <input type="date" class="new-date"><input type="time" class="new-time">
+              </td>
+              <td>
+              Usage: <input type="number"  class="new-wattage">
+              </td>
+              <td class="new-btns">
+              <button class="new-meter-record">+</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
