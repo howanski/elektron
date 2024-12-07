@@ -28,6 +28,20 @@ export class Meter {
         this.meterEntries.push(entry);
     }
 
+    removeEntry(timestamp: number) {
+        for (let i = 0; i < this.meterEntries.length; i++) {
+            if (this.meterEntries[i].timestamp == timestamp) {
+                if (i == 0) {
+                    this.meterEntries.shift();
+                } else {
+                    this.meterEntries.splice(i, i);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     // #TODO time delimiters?
     getEntries() {
         return this.meterEntries;
@@ -61,6 +75,33 @@ export class SaveFile {
         return [];
     }
 
+    addMeterEntry(
+        meterId: number,
+        timestamp: number,
+        wattHours: number
+    ): boolean {
+        for (let i = 0; i < this.meters.length; i++) {
+            if (this.meters[i].id == meterId) {
+                const meterEntry = new MeterEntry(timestamp, wattHours);
+                this.meters[i].addEntry(meterEntry);
+                saveData(this);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    removeMeterEntry(meterId: number, timestamp: number): boolean {
+        for (let i = 0; i < this.meters.length; i++) {
+            if (this.meters[i].id == meterId) {
+                const result = this.meters[i].removeEntry(timestamp);
+                saveData(this);
+                return result;
+            }
+        }
+        return false;
+    }
+
     constructor() {
         this.meters = [];
     }
@@ -82,7 +123,7 @@ function ensureFileExists() {
     if (!fs.existsSync(filename)) {
         const defaultDataObject = new SaveFile();
         const defaultMeter = new Meter("Default");
-        const defaultEntry = new MeterEntry(0, 0);
+        const defaultEntry = new MeterEntry(1000, 0);
         defaultMeter.addEntry(defaultEntry);
         defaultDataObject.addMeter(defaultMeter);
         saveData(defaultDataObject);
