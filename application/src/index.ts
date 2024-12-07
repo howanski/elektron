@@ -44,10 +44,30 @@ const createWindow = (): void => {
             );
         }
     );
+
+    ipcMain.handle(
+        "addMeterEntry",
+        (
+            event: IpcMainInvokeEvent,
+            meterId: number,
+            timestamp: number,
+            wattHours: number
+        ) => {
+            Persistence.getData().addMeterEntry(meterId, timestamp, wattHours);
+            return true;
+        }
+    );
+
+    ipcMain.handle(
+        "removeMeterEntry",
+        (event: IpcMainInvokeEvent, meterId: number, timestamp: number) => {
+            Persistence.getData().removeMeterEntry(meterId, timestamp);
+            return true;
+        }
+    );
     // ---------------------- //
     // --- END API EVENTS --- //
     // ---------------------- //
-
 
     // and load the index.html of the app.
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);

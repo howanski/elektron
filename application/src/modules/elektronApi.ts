@@ -8,9 +8,19 @@ interface GetterOfMeterEntries {
     (meterId: number): Promise<Array<FlatMeterEntry>>;
 }
 
+interface AdderOfMeterEntry {
+    (meterId: number, timestamp: number, wattHours: number): Promise<boolean>;
+}
+
+interface RemoverOfMeterEntry {
+    (meterId: number, timestamp: number): Promise<boolean>;
+}
+
 export interface ElektronAPI {
     getMeters: GetterOfMeters;
     getMeterEntries: GetterOfMeterEntries;
+    addMeterEntry: AdderOfMeterEntry;
+    removeMeterEntry: RemoverOfMeterEntry;
 }
 
 export class FlatMeter {
