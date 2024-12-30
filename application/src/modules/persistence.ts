@@ -34,10 +34,10 @@ export class Meter {
                 if (i == 0) {
                     this.meterEntries.shift();
                 } else {
-                    this.meterEntries.splice(i, i);
+                    this.meterEntries.splice(i, 1);
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }
